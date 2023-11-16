@@ -1163,10 +1163,10 @@ function transpose(m) {
 // vector functions
 
 // computes the dot product between vectors u and v
-function dotProduct(u, v) {
+function dot(u, v) {
     const len = u.length;
     if (len !== v.length) {
-        throw new Error("dotProduct(): vectors are not same dimension");
+        throw new Error("dot(): vectors are not same dimension");
     }
 
     let sum = 0;
@@ -1228,31 +1228,31 @@ function negate(u) {
 //----------------------------------------------------------------------------
 
 // computes cross product of vectors u and v
-function crossProduct(u, v) {
+function cross(u, v) {
     if (!Array.isArray(u) || u.length < 3) {
         throw new Error(
-            "crossProduct(): first argument is not vector of at least 3",
+            "cross(): first argument is not vector of at least 3",
         );
     }
 
     if (!Array.isArray(v) || v.length < 3) {
         throw new Error(
-            "crossProduct(): second argument is not vector of at least 3",
+            "cross(): second argument is not vector of at least 3",
         );
     }
 
-    return [
+    return vec3(
         u[1] * v[2] - u[2] * v[1],
         u[2] * v[0] - u[0] * v[2],
         u[0] * v[1] - u[1] * v[0],
-    ];
+    );
 }
 
 //----------------------------------------------------------------------------
 
 // magnitude of vector
 function vecMagnitude(u) {
-    return Math.sqrt(dotProduct(u, u));
+    return Math.sqrt(dot(u, u));
 }
 
 //----------------------------------------------------------------------------

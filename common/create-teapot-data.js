@@ -26,7 +26,7 @@ function nbezier(u) {
 // let indices;
 // let vec4;
 // let add;
-// let crossProduct;
+// let cross;
 // let normalize;
 
 // returns vertices and normals for a particular resolution
@@ -162,7 +162,7 @@ function createTeapotGeometry(numDivisions) {
                     }
                 }
 
-                const temp = crossProduct(tData[i][j], sData[i][j]);
+                const temp = cross(tData[i][j], sData[i][j]);
                 nData[i][j] = normalize(vec4(temp[0], temp[1], temp[2], 0));
             }
         }

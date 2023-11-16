@@ -19,8 +19,8 @@ function lookAt(eye, at, up) {
     }
 
     const lookAtVec = normalize(subtract(at, eye));
-    const u = normalize(crossProduct(lookAtVec, up));
-    const v = normalize(crossProduct(u, lookAtVec));
+    const u = normalize(cross(lookAtVec, up));
+    const v = normalize(cross(u, lookAtVec));
     const n = negate(lookAtVec);
 
     const result = [
