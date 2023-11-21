@@ -1230,15 +1230,11 @@ function negate(u) {
 // computes cross product of vectors u and v
 function cross(u, v) {
     if (!Array.isArray(u) || u.length < 3) {
-        throw new Error(
-            "cross(): first argument is not vector of at least 3",
-        );
+        throw new Error("cross(): first argument is not vector of at least 3");
     }
 
     if (!Array.isArray(v) || v.length < 3) {
-        throw new Error(
-            "cross(): second argument is not vector of at least 3",
-        );
+        throw new Error("cross(): second argument is not vector of at least 3");
     }
 
     return vec3(

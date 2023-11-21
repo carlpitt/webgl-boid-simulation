@@ -3,10 +3,10 @@ function ndcToWorld(wcMin, wcMax) {
     const wcHeight = wcMax[1] - wcMin[1];
 
     const m = mult(
-        translate3x3(wcMin[0], wcMin[1]),
+        translate3(wcMin[0], wcMin[1]),
         mult(
-            scale3x3(wcWidth, wcHeight),
-            mult(scale3x3(0.5, 0.5), translate3x3(1, 1)),
+            scale3(wcWidth, wcHeight),
+            mult(scale3(0.5, 0.5), translate3(1, 1)),
         ),
     );
     m.matrix = true;
@@ -16,12 +16,12 @@ function ndcToWorld(wcMin, wcMax) {
 function displayToNDC(canvasDims) {
     // form the xform
     const m = mult(
-        scale3x3(1, -1, 1),
+        scale3(1, -1, 1),
         mult(
-            translate3x3(-1, -1, 0),
+            translate3(-1, -1, 0),
             mult(
-                scale3x3(2, 2, 1),
-                scale3x3(1 / canvasDims[0], 1 / canvasDims[1], 1),
+                scale3(2, 2, 1),
+                scale3(1 / canvasDims[0], 1 / canvasDims[1], 1),
             ),
         ),
     );
@@ -34,17 +34,17 @@ function worldToNDC(wcMin, wcMax) {
     const wcWidth = wcMax[0] - wcMin[0];
     const wcHeight = wcMax[1] - wcMin[1];
     const m = mult(
-        translate3x3(-1, -1),
+        translate3(-1, -1),
         mult(
-            scale3x3(2 / wcWidth, 2 / wcHeight),
-            translate3x3(-wcMin[0], -wcMin[1]),
+            scale3(2 / wcWidth, 2 / wcHeight),
+            translate3(-wcMin[0], -wcMin[1]),
         ),
     );
     m.matrix = true;
     return m;
 }
 
-function translate3x3(tx, ty) {
+function translate3(tx, ty) {
     const trans = mat3();
     trans[0][2] = tx;
     trans[1][2] = ty;
@@ -52,7 +52,7 @@ function translate3x3(tx, ty) {
     return trans;
 }
 
-function translate4x4(tx, ty, tz) {
+function translate(tx, ty, tz) {
     const trans = mat4();
     trans[0][3] = tx;
     trans[1][3] = ty;
@@ -61,7 +61,7 @@ function translate4x4(tx, ty, tz) {
     return trans;
 }
 
-function scale3x3(sx, sy) {
+function scale3(sx, sy) {
     const scale = mat3();
     scale[0][0] = sx;
     scale[1][1] = sy;
@@ -69,7 +69,7 @@ function scale3x3(sx, sy) {
     return scale;
 }
 
-function scale4x4(sx, sy, sz) {
+function scale(sx, sy, sz) {
     const scale = mat4();
     scale[0][0] = sx;
     scale[1][1] = sy;
@@ -78,7 +78,7 @@ function scale4x4(sx, sy, sz) {
     return scale;
 }
 
-function rotate3x3(theta) {
+function rotate3(theta) {
     const rot = mat3();
     rot[0][0] = Math.cos(theta);
     rot[0][1] = -Math.sin(theta);
@@ -88,7 +88,7 @@ function rotate3x3(theta) {
     return rot;
 }
 
-function rotate4x4(theta, dim) {
+function rotate(theta, dim) {
     const rot = mat4();
     switch (dim) {
         case "x":
