@@ -10,30 +10,20 @@
             #version 300 es
 
             // input position attribute
-            in vec4 vecPosition;
-            in vec4 vecNormal;
+            in vec4 vPosition;
+            in vec4 vColor;
 
             // transformation matrices
             uniform mat4 modelView;
             uniform mat4 projection;
 
-            uniform vec4 lightPosition;
-
             // varying
-            // out?
-            out vec3 N;
-            out vec3 L;
-            out vec3 E;
+            out vec4 interColor;
 
             void main() {
-                vec3 position = (modelView * vecPosition).xyz;
-                L = normalize(lightPosition.xyz - position);
-                // camera is at origin
-                E = normalize(-position);
-                // transform normal
-                N = normalize((modelView * vecNormal).xyz);
+                gl_Position = projection * modelView * vPosition;
 
-                gl_Position = projection * modelView * vecPosition;
+                interColor = vColor;
             }
         </script>
 
@@ -44,37 +34,13 @@
 
             precision mediump float;
 
-            uniform vec4 ambientProduct;
-            uniform vec4 diffuseProduct;
-            uniform vec4 specularProduct;
-            // uniform vec4 lightPosition;
-
-            uniform float shininess;
-
             // varying
-            in vec3 N;
-            in vec3 L;
-            in vec3 E;
+            in vec4 interColor;
 
             out vec4 fragColor;
 
             void main() {
-                vec4 ambient = ambientProduct;
-
-                float Kd = max(dot(L, N), 0.0);
-                vec4 diffuse = Kd * diffuseProduct;
-
-                vec3 H = normalize(L + E);
-                float Ks = pow(max(dot(N, H), 0.0), shininess);
-                // vec4 specular = dot(L, N) < 0.0 ? vec4(0, 0, 0, 1) : Ks * specularProduct;
-                vec4 specular = Ks * specularProduct;
-                // light source is not visible
-                if (dot(L, N) < 0.0) {
-                    specular = vec4(0, 0, 0, 1);
-                }
-
-                fragColor = ambient + diffuse + specular;
-                fragColor.a = 1.0;
+                fragColor = interColor;
                 // gl_FragColor = fragColor;
             }
         </script>
@@ -85,15 +51,63 @@
         <script defer src="./common/mat-vec.js"></script>
         <script defer src="./common/transform.js"></script>
         <script defer src="./common/projection.js"></script>
-        <script defer src="./common/create-teapot-data.js"></script>
-        <script defer src="./common/patches.js"></script>
-        <script defer src="./common/vertices.js"></script>
-        <script defer src="./teapot.js"></script>
+        <script defer src="./tetra.js"></script>
+        <script defer src="./boids.js"></script>
     </head>
 
     <body>
         <canvas id="webgl-canvas" width="512" height="512"
             >Your browser does not support the HTML5 canvas element.</canvas
         >
+
+        <br />
+        width:
+        <input
+            type="range"
+            min="-10"
+            max="10"
+            value="0.1"
+            step="0.01"
+            class="slider"
+            id="width"
+        />
+        <div id="width-output"></div>
+        <br />
+        height:
+        <input
+            type="range"
+            min="-10"
+            max="10"
+            value="0.1"
+            step="0.01"
+            class="slider"
+            id="height"
+        />
+        <div id="height-output"></div>
+        <br />
+        near:
+        <input
+            type="range"
+            min="0"
+            max="12"
+            value="5"
+            step="0.01"
+            class="slider"
+            id="near"
+        />
+        <div id="near-output"></div>
+        <br />
+        far:
+        <input
+            type="range"
+            min="0"
+            max="500"
+            value="5.74"
+            step="0.01"
+            class="slider"
+            id="far"
+        />
+        <div id="far-output"></div>
+        <br />
     </body>
 </html>

@@ -75,7 +75,7 @@ function vec3(...args) {
             }
 
             if (typeof arg[0] === "number") {
-                if (arg.length === 3) {
+                if (arg.length === 3 || arg.length === 4) {
                     for (let i = 0; i < 3; ++i) {
                         if (typeof arg[i] !== "number") {
                             throw new Error("vec3(): bad argument");
@@ -1128,6 +1128,9 @@ function mult(u, v) {
     throw new Error("mult(): arguments of unknown or mismatched type");
 }
 
+// TODO(carl)
+function divide() {}
+
 // matrix functions
 
 // transpose matrix
@@ -1299,3 +1302,6 @@ function mix(u, v, s) {
 
     return result;
 }
+
+// TODO(carl)
+function distance(v0, v1) {}

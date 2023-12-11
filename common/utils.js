@@ -3,7 +3,7 @@
 // creator: Kalpathi Subramanian
 // sources: various
 // date: 2021-12-23
-// editor: carl pittenger
+// editor: Carl Pittenger
 // edit date: 2023-11-05
 
 // initializes and returns webgl context
