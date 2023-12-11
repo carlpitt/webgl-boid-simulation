@@ -107,12 +107,12 @@ window.onload = () => {
         return null;
     }
 
-    nearInput.addEventListener('input', updateProjection);
-    farInput.addEventListener('input', updateProjection);
-    widthInput.addEventListener('input', updateProjection);
-    heightInput.addEventListener('input', updateProjection);
+    nearInput.addEventListener("input", updateProjection);
+    farInput.addEventListener("input", updateProjection);
+    widthInput.addEventListener("input", updateProjection);
+    heightInput.addEventListener("input", updateProjection);
 
-    updateProjection()
+    updateProjection();
 
     const lookAtZ = -210;
 
